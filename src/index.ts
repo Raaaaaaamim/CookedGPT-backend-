@@ -1,18 +1,11 @@
 import { Hono } from "hono";
-import { connectToDB, prisma } from "./database/index.js";
+import { connectToDB } from "./database/index.js";
+import { transform } from "./routes/transform.js";
 
 const app = new Hono();
 connectToDB();
-app.get("/", async (c) => {
-  await prisma.user.create({
-    data: {
-      clerkId: "abc",
-      fullName: "John Doe",
-      username: "johndoe",
-    },
-  });
-  return c.text("Hello Hono!");
-});
+const BASE_URL = "/api/v1";
+app.route(`${BASE_URL}/transform`, transform);
 
 export default {
   fetch: app.fetch,

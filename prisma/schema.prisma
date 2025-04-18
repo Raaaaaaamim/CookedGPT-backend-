@@ -23,10 +23,21 @@ model User {
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   apiKeys         Keys[]
+  Tags            Tag[]
+}
+
+model Tag {
+  id        String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  prompt    String
+  authorId  String   @unique @db.Uuid
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Keys {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id        String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   apiKey    String
   authorId  String   @unique @db.Uuid
   author    User     @relation(fields: [authorId], references: [id])
