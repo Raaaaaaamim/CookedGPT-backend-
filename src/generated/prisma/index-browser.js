@@ -126,6 +126,15 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  prompt: 'prompt',
+  authorId: 'authorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.KeysScalarFieldEnum = {
   id: 'id',
   apiKey: 'apiKey',
@@ -170,17 +179,9 @@ exports.Type = exports.$Enums.Type = {
   GEMINI: 'GEMINI'
 };
 
-exports.TAGS = exports.$Enums.TAGS = {
-  SAVAGE: 'SAVAGE',
-  PROFESSIONAL: 'PROFESSIONAL',
-  HUMANLIKE: 'HUMANLIKE',
-  GENZ: 'GENZ',
-  GENALPHA: 'GENALPHA',
-  ULTIMATE: 'ULTIMATE'
-};
-
 exports.Prisma.ModelName = {
   User: 'User',
+  Tag: 'Tag',
   Keys: 'Keys',
   Transformations: 'Transformations',
   Model: 'Model'

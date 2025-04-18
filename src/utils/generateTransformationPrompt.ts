@@ -34,7 +34,7 @@ const generateTransformationPrompt = ({
   }
 
   // Default to GENZ if no tags
-  const effectiveTags = tags.length > 0 ? tags : ["GENZ"];
+  const effectiveTags = tags.length > 0 ? tags : ["GENZ", "SAVAGE"];
 
   // Validate tags
   const validTags = Object.keys(SUB_PROMPTS);
