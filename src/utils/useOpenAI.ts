@@ -6,7 +6,7 @@ interface Props {
 }
 const useOpenRouter = async ({
   prompt,
-  model = "openai/gpt-4o-mini-2024-07-18",
+  model = "google/gemini-2.5-pro-exp-03-25:free",
 }: Props): Promise<string> => {
   const response = await axios.post(
     "https://openrouter.ai/api/v1/chat/completions",
