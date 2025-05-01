@@ -3,11 +3,13 @@ import { prisma } from "../../database";
 
 const signup = async (c: Context): Promise<Response> => {
   const body = await c.req.json();
-  const { fullName, username, email, clerkId } = body;
+
+  const { fullName, username, email } = body;
+  const clerkId = c.get("clerkAuth")?.userId;
   if (!fullName || !username || !email || !clerkId) {
     return c.json({ error: "Missing required fields" }, 400);
   }
-  const user = await prisma.user.create({
+  const user = await prisma.users.create({
     data: {
       fullName,
       username,
@@ -15,7 +17,6 @@ const signup = async (c: Context): Promise<Response> => {
       clerkId,
     },
   });
-
   return c.json(user);
 };
 export default signup;

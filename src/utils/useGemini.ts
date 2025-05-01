@@ -14,7 +14,7 @@ interface Props {
 }
 
 const useGemini = async ({
-  model = "gemini-2.0-flash-001",
+  model = "gemini-2.0-flash",
   prompt,
 }: Props): Promise<string> => {
   try {

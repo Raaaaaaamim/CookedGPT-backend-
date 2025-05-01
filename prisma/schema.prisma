@@ -14,7 +14,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Users {
   id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   username        String            @unique
   email           String            @unique
@@ -24,15 +24,15 @@ model User {
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   apiKeys         Keys[]
-  Tags            Tag[]
+  Tags            Tags[]
 }
 
-model Tag {
+model Tags {
   id        String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name      String
   prompt    String
   authorId  String   @unique @db.Uuid
-  author    User     @relation(fields: [authorId], references: [id])
+  author    Users    @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -41,9 +41,9 @@ model Keys {
   id        String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   apiKey    String
   authorId  String   @unique @db.Uuid
-  author    User     @relation(fields: [authorId], references: [id])
-  model     Model    @relation(fields: [modelId], references: [id])
-  type      Type
+  author    Users    @relation(fields: [authorId], references: [id])
+  model     Models   @relation(fields: [modelId], references: [id])
+  type      TYPE
   modelId   String   @unique @db.Uuid // Add @db.Uuid here to match Model.id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -52,25 +52,30 @@ model Keys {
 model Transformations {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   authorId  String   @db.Uuid
-  author    User     @relation(fields: [authorId], references: [id])
+  author    Users    @relation(fields: [authorId], references: [id])
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   tags      String[]
 }
 
-model Model {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name      String
-  fullName  String   @unique
-  apiKey    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  type      Type
-  Keys      Keys?
+model Models {
+  id          String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String      @unique
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  performance PERFORMANCE
+  type        TYPE
+  Keys        Keys?
 }
 
-enum Type {
+enum PERFORMANCE {
+  AVERAGE
+  GOOD
+  EXCELLENT
+}
+
+enum TYPE {
   OPENAI
   OPENROUTER
   GEMINI

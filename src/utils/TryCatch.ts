@@ -1,5 +1,5 @@
 import { Context, Next } from "hono";
-import { ErrorTypes } from "../../types/ErrorTypes";
+import { StatusCodes } from "../../enums/ErrorEnums";
 
 export const TryCatch =
   (controller: (c: Context, next: Next) => Promise<Response>) =>
@@ -9,6 +9,6 @@ export const TryCatch =
     } catch (error: any) {
       console.log(error);
 
-      return c.json({ error: error?.message || ErrorTypes.SERVER_ERROR }, 500);
+      return c.json({ error: error?.message || StatusCodes.SERVER_ERROR }, 500);
     }
   };
