@@ -20,11 +20,13 @@ model Users {
   email           String            @unique
   fullName        String
   clerkId         String            @unique
+  avatar          String?
   transformations Transformations[]
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   apiKeys         Keys[]
   Tags            Tags[]
+  role            ROLE              @default(USER)
 }
 
 model Tags {
@@ -44,7 +46,7 @@ model Keys {
   author    Users    @relation(fields: [authorId], references: [id])
   model     Models   @relation(fields: [modelId], references: [id])
   type      TYPE
-  modelId   String   @unique @db.Uuid // Add @db.Uuid here to match Model.id
+  modelId   String   @unique @db.Uuid
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -79,4 +81,9 @@ enum TYPE {
   OPENAI
   OPENROUTER
   GEMINI
+}
+
+enum ROLE {
+  USER
+  ADMIN
 }

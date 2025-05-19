@@ -126,8 +126,10 @@ exports.Prisma.UsersScalarFieldEnum = {
   email: 'email',
   fullName: 'fullName',
   clerkId: 'clerkId',
+  avatar: 'avatar',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  role: 'role'
 };
 
 exports.Prisma.TagsScalarFieldEnum = {
@@ -176,6 +178,16 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.ROLE = exports.$Enums.ROLE = {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+};
+
 exports.TYPE = exports.$Enums.TYPE = {
   OPENAI: 'OPENAI',
   OPENROUTER: 'OPENROUTER',
