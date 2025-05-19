@@ -166,7 +166,8 @@ exports.Prisma.ModelsScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   performance: 'performance',
-  type: 'type'
+  type: 'type',
+  pro: 'pro'
 };
 
 exports.Prisma.SortOrder = {

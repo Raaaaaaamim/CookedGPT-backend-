@@ -6,6 +6,10 @@ const verifyUser = async (clerkId: string) => {
     select: { id: true },
   });
 
+  if (!user) {
+    return null;
+  }
+
   return user;
 };
 

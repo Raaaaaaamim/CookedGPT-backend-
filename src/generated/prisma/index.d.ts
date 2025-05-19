@@ -5749,6 +5749,7 @@ export namespace Prisma {
     updatedAt: Date | null
     performance: $Enums.PERFORMANCE | null
     type: $Enums.TYPE | null
+    pro: boolean | null
   }
 
   export type ModelsMaxAggregateOutputType = {
@@ -5758,6 +5759,7 @@ export namespace Prisma {
     updatedAt: Date | null
     performance: $Enums.PERFORMANCE | null
     type: $Enums.TYPE | null
+    pro: boolean | null
   }
 
   export type ModelsCountAggregateOutputType = {
@@ -5767,6 +5769,7 @@ export namespace Prisma {
     updatedAt: number
     performance: number
     type: number
+    pro: number
     _all: number
   }
 
@@ -5778,6 +5781,7 @@ export namespace Prisma {
     updatedAt?: true
     performance?: true
     type?: true
+    pro?: true
   }
 
   export type ModelsMaxAggregateInputType = {
@@ -5787,6 +5791,7 @@ export namespace Prisma {
     updatedAt?: true
     performance?: true
     type?: true
+    pro?: true
   }
 
   export type ModelsCountAggregateInputType = {
@@ -5796,6 +5801,7 @@ export namespace Prisma {
     updatedAt?: true
     performance?: true
     type?: true
+    pro?: true
     _all?: true
   }
 
@@ -5878,6 +5884,7 @@ export namespace Prisma {
     updatedAt: Date
     performance: $Enums.PERFORMANCE
     type: $Enums.TYPE
+    pro: boolean
     _count: ModelsCountAggregateOutputType | null
     _min: ModelsMinAggregateOutputType | null
     _max: ModelsMaxAggregateOutputType | null
@@ -5904,6 +5911,7 @@ export namespace Prisma {
     updatedAt?: boolean
     performance?: boolean
     type?: boolean
+    pro?: boolean
     Keys?: boolean | Models$KeysArgs<ExtArgs>
   }, ExtArgs["result"]["models"]>
 
@@ -5914,6 +5922,7 @@ export namespace Prisma {
     updatedAt?: boolean
     performance?: boolean
     type?: boolean
+    pro?: boolean
   }, ExtArgs["result"]["models"]>
 
   export type ModelsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5923,6 +5932,7 @@ export namespace Prisma {
     updatedAt?: boolean
     performance?: boolean
     type?: boolean
+    pro?: boolean
   }, ExtArgs["result"]["models"]>
 
   export type ModelsSelectScalar = {
@@ -5932,9 +5942,10 @@ export namespace Prisma {
     updatedAt?: boolean
     performance?: boolean
     type?: boolean
+    pro?: boolean
   }
 
-  export type ModelsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "performance" | "type", ExtArgs["result"]["models"]>
+  export type ModelsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "performance" | "type" | "pro", ExtArgs["result"]["models"]>
   export type ModelsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Keys?: boolean | Models$KeysArgs<ExtArgs>
   }
@@ -5953,6 +5964,7 @@ export namespace Prisma {
       updatedAt: Date
       performance: $Enums.PERFORMANCE
       type: $Enums.TYPE
+      pro: boolean
     }, ExtArgs["result"]["models"]>
     composites: {}
   }
@@ -6383,6 +6395,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"Models", 'DateTime'>
     readonly performance: FieldRef<"Models", 'PERFORMANCE'>
     readonly type: FieldRef<"Models", 'TYPE'>
+    readonly pro: FieldRef<"Models", 'Boolean'>
   }
     
 
@@ -6880,7 +6893,8 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     performance: 'performance',
-    type: 'type'
+    type: 'type',
+    pro: 'pro'
   };
 
   export type ModelsScalarFieldEnum = (typeof ModelsScalarFieldEnum)[keyof typeof ModelsScalarFieldEnum]
@@ -6982,6 +6996,13 @@ export namespace Prisma {
    * Reference to a field of type 'PERFORMANCE[]'
    */
   export type ListEnumPERFORMANCEFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PERFORMANCE[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -7281,6 +7302,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Models"> | Date | string
     performance?: EnumPERFORMANCEFilter<"Models"> | $Enums.PERFORMANCE
     type?: EnumTYPEFilter<"Models"> | $Enums.TYPE
+    pro?: BoolFilter<"Models"> | boolean
     Keys?: XOR<KeysNullableScalarRelationFilter, KeysWhereInput> | null
   }
 
@@ -7291,6 +7313,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     performance?: SortOrder
     type?: SortOrder
+    pro?: SortOrder
     Keys?: KeysOrderByWithRelationInput
   }
 
@@ -7304,6 +7327,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Models"> | Date | string
     performance?: EnumPERFORMANCEFilter<"Models"> | $Enums.PERFORMANCE
     type?: EnumTYPEFilter<"Models"> | $Enums.TYPE
+    pro?: BoolFilter<"Models"> | boolean
     Keys?: XOR<KeysNullableScalarRelationFilter, KeysWhereInput> | null
   }, "id" | "name">
 
@@ -7314,6 +7338,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     performance?: SortOrder
     type?: SortOrder
+    pro?: SortOrder
     _count?: ModelsCountOrderByAggregateInput
     _max?: ModelsMaxOrderByAggregateInput
     _min?: ModelsMinOrderByAggregateInput
@@ -7329,6 +7354,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Models"> | Date | string
     performance?: EnumPERFORMANCEWithAggregatesFilter<"Models"> | $Enums.PERFORMANCE
     type?: EnumTYPEWithAggregatesFilter<"Models"> | $Enums.TYPE
+    pro?: BoolWithAggregatesFilter<"Models"> | boolean
   }
 
   export type UsersCreateInput = {
@@ -7626,6 +7652,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     performance: $Enums.PERFORMANCE
     type: $Enums.TYPE
+    pro?: boolean
     Keys?: KeysCreateNestedOneWithoutModelInput
   }
 
@@ -7636,6 +7663,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     performance: $Enums.PERFORMANCE
     type: $Enums.TYPE
+    pro?: boolean
     Keys?: KeysUncheckedCreateNestedOneWithoutModelInput
   }
 
@@ -7646,6 +7674,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     performance?: EnumPERFORMANCEFieldUpdateOperationsInput | $Enums.PERFORMANCE
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
+    pro?: BoolFieldUpdateOperationsInput | boolean
     Keys?: KeysUpdateOneWithoutModelNestedInput
   }
 
@@ -7656,6 +7685,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     performance?: EnumPERFORMANCEFieldUpdateOperationsInput | $Enums.PERFORMANCE
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
+    pro?: BoolFieldUpdateOperationsInput | boolean
     Keys?: KeysUncheckedUpdateOneWithoutModelNestedInput
   }
 
@@ -7666,6 +7696,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     performance: $Enums.PERFORMANCE
     type: $Enums.TYPE
+    pro?: boolean
   }
 
   export type ModelsUpdateManyMutationInput = {
@@ -7675,6 +7706,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     performance?: EnumPERFORMANCEFieldUpdateOperationsInput | $Enums.PERFORMANCE
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
+    pro?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ModelsUncheckedUpdateManyInput = {
@@ -7684,6 +7716,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     performance?: EnumPERFORMANCEFieldUpdateOperationsInput | $Enums.PERFORMANCE
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
+    pro?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -8016,6 +8049,11 @@ export namespace Prisma {
     not?: NestedEnumPERFORMANCEFilter<$PrismaModel> | $Enums.PERFORMANCE
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type KeysNullableScalarRelationFilter = {
     is?: KeysWhereInput | null
     isNot?: KeysWhereInput | null
@@ -8028,6 +8066,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     performance?: SortOrder
     type?: SortOrder
+    pro?: SortOrder
   }
 
   export type ModelsMaxOrderByAggregateInput = {
@@ -8037,6 +8076,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     performance?: SortOrder
     type?: SortOrder
+    pro?: SortOrder
   }
 
   export type ModelsMinOrderByAggregateInput = {
@@ -8046,6 +8086,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     performance?: SortOrder
     type?: SortOrder
+    pro?: SortOrder
   }
 
   export type EnumPERFORMANCEWithAggregatesFilter<$PrismaModel = never> = {
@@ -8056,6 +8097,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPERFORMANCEFilter<$PrismaModel>
     _max?: NestedEnumPERFORMANCEFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type TransformationsCreateNestedManyWithoutAuthorInput = {
@@ -8285,6 +8334,10 @@ export namespace Prisma {
     set?: $Enums.PERFORMANCE
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type KeysUpdateOneWithoutModelNestedInput = {
     create?: XOR<KeysCreateWithoutModelInput, KeysUncheckedCreateWithoutModelInput>
     connectOrCreate?: KeysCreateOrConnectWithoutModelInput
@@ -8480,6 +8533,11 @@ export namespace Prisma {
     not?: NestedEnumPERFORMANCEFilter<$PrismaModel> | $Enums.PERFORMANCE
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedEnumPERFORMANCEWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.PERFORMANCE | EnumPERFORMANCEFieldRefInput<$PrismaModel>
     in?: $Enums.PERFORMANCE[] | ListEnumPERFORMANCEFieldRefInput<$PrismaModel>
@@ -8488,6 +8546,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPERFORMANCEFilter<$PrismaModel>
     _max?: NestedEnumPERFORMANCEFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type TransformationsCreateWithoutAuthorInput = {
@@ -8767,6 +8833,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     performance: $Enums.PERFORMANCE
     type: $Enums.TYPE
+    pro?: boolean
   }
 
   export type ModelsUncheckedCreateWithoutKeysInput = {
@@ -8776,6 +8843,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     performance: $Enums.PERFORMANCE
     type: $Enums.TYPE
+    pro?: boolean
   }
 
   export type ModelsCreateOrConnectWithoutKeysInput = {
@@ -8840,6 +8908,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     performance?: EnumPERFORMANCEFieldUpdateOperationsInput | $Enums.PERFORMANCE
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
+    pro?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ModelsUncheckedUpdateWithoutKeysInput = {
@@ -8849,6 +8918,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     performance?: EnumPERFORMANCEFieldUpdateOperationsInput | $Enums.PERFORMANCE
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
+    pro?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UsersCreateWithoutTransformationsInput = {

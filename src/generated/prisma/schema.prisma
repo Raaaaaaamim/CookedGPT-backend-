@@ -69,6 +69,7 @@ model Models {
   performance PERFORMANCE
   type        TYPE
   Keys        Keys?
+  pro         Boolean     @default(false)
 }
 
 enum PERFORMANCE {
