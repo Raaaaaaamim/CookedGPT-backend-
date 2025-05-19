@@ -65,6 +65,51 @@ const clerk = async (c: Context): Promise<Response> => {
         { message: "User created successfully" },
         StatusCodes.SUCCESS
       );
+    } else if (eventType === "user.deleted") {
+      const userData = evt.data;
+      const user = await prisma.users.delete({
+        where: {
+          clerkId: userData.id,
+        },
+      });
+      return c.json(
+        { message: "User deleted successfully" },
+        StatusCodes.SUCCESS
+      );
+    } else if (eventType === "user.updated") {
+      const userData = evt.data;
+
+      const user = await prisma.users.findUnique({
+        where: {
+          clerkId: userData.id,
+        },
+      });
+      if (!user) {
+        return c.json({ error: "User not found" }, StatusCodes.BAD_REQUEST);
+      }
+
+      await prisma.users.update({
+        where: {
+          clerkId: userData.id,
+        },
+        data: {
+          username:
+            `${userData.first_name}_${userData.last_name}_${userData.id}` ||
+            user.username,
+          email:
+            userData.email_addresses.find(
+              (email) => email.id === userData.primary_email_address_id
+            )?.email_address || user.email,
+          fullName:
+            userData.first_name + " " + userData.last_name || user.fullName,
+          clerkId: userData.id || user.clerkId,
+          avatar: userData.image_url || user.avatar,
+        },
+      });
+      return c.json(
+        { message: "User updated successfully" },
+        StatusCodes.SUCCESS
+      );
     }
   }
   return c.json({ error: "Invalid event type" }, StatusCodes.BAD_REQUEST);
