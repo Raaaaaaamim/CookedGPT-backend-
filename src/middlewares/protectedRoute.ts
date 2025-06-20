@@ -4,6 +4,7 @@ import { StatusCodes } from "../../enums/ErrorEnums";
 
 const ProtectedRoute = (c: Context, next: Next) => {
   const auth = getAuth(c);
+  console.log(auth);
 
   if (!auth?.userId) {
     return c.json(

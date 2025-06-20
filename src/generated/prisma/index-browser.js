@@ -146,7 +146,6 @@ exports.Prisma.KeysScalarFieldEnum = {
   apiKey: 'apiKey',
   authorId: 'authorId',
   type: 'type',
-  modelId: 'modelId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -167,7 +166,9 @@ exports.Prisma.ModelsScalarFieldEnum = {
   updatedAt: 'updatedAt',
   performance: 'performance',
   type: 'type',
-  pro: 'pro'
+  pro: 'pro',
+  speed: 'speed',
+  accuracy: 'accuracy'
 };
 
 exports.Prisma.SortOrder = {

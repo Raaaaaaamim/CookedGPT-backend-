@@ -3588,7 +3588,6 @@ export namespace Prisma {
     apiKey: string | null
     authorId: string | null
     type: $Enums.TYPE | null
-    modelId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3598,7 +3597,6 @@ export namespace Prisma {
     apiKey: string | null
     authorId: string | null
     type: $Enums.TYPE | null
-    modelId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3608,7 +3606,6 @@ export namespace Prisma {
     apiKey: number
     authorId: number
     type: number
-    modelId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -3620,7 +3617,6 @@ export namespace Prisma {
     apiKey?: true
     authorId?: true
     type?: true
-    modelId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3630,7 +3626,6 @@ export namespace Prisma {
     apiKey?: true
     authorId?: true
     type?: true
-    modelId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3640,7 +3635,6 @@ export namespace Prisma {
     apiKey?: true
     authorId?: true
     type?: true
-    modelId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -3723,7 +3717,6 @@ export namespace Prisma {
     apiKey: string
     authorId: string
     type: $Enums.TYPE
-    modelId: string
     createdAt: Date
     updatedAt: Date
     _count: KeysCountAggregateOutputType | null
@@ -3750,11 +3743,9 @@ export namespace Prisma {
     apiKey?: boolean
     authorId?: boolean
     type?: boolean
-    modelId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     author?: boolean | UsersDefaultArgs<ExtArgs>
-    model?: boolean | ModelsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["keys"]>
 
   export type KeysSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3762,11 +3753,9 @@ export namespace Prisma {
     apiKey?: boolean
     authorId?: boolean
     type?: boolean
-    modelId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     author?: boolean | UsersDefaultArgs<ExtArgs>
-    model?: boolean | ModelsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["keys"]>
 
   export type KeysSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3774,11 +3763,9 @@ export namespace Prisma {
     apiKey?: boolean
     authorId?: boolean
     type?: boolean
-    modelId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     author?: boolean | UsersDefaultArgs<ExtArgs>
-    model?: boolean | ModelsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["keys"]>
 
   export type KeysSelectScalar = {
@@ -3786,37 +3773,31 @@ export namespace Prisma {
     apiKey?: boolean
     authorId?: boolean
     type?: boolean
-    modelId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type KeysOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "apiKey" | "authorId" | "type" | "modelId" | "createdAt" | "updatedAt", ExtArgs["result"]["keys"]>
+  export type KeysOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "apiKey" | "authorId" | "type" | "createdAt" | "updatedAt", ExtArgs["result"]["keys"]>
   export type KeysInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UsersDefaultArgs<ExtArgs>
-    model?: boolean | ModelsDefaultArgs<ExtArgs>
   }
   export type KeysIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UsersDefaultArgs<ExtArgs>
-    model?: boolean | ModelsDefaultArgs<ExtArgs>
   }
   export type KeysIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UsersDefaultArgs<ExtArgs>
-    model?: boolean | ModelsDefaultArgs<ExtArgs>
   }
 
   export type $KeysPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Keys"
     objects: {
       author: Prisma.$UsersPayload<ExtArgs>
-      model: Prisma.$ModelsPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       apiKey: string
       authorId: string
       type: $Enums.TYPE
-      modelId: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["keys"]>
@@ -4214,7 +4195,6 @@ export namespace Prisma {
   export interface Prisma__KeysClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     author<T extends UsersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsersDefaultArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    model<T extends ModelsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ModelsDefaultArgs<ExtArgs>>): Prisma__ModelsClient<$Result.GetResult<Prisma.$ModelsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4248,7 +4228,6 @@ export namespace Prisma {
     readonly apiKey: FieldRef<"Keys", 'String'>
     readonly authorId: FieldRef<"Keys", 'String'>
     readonly type: FieldRef<"Keys", 'TYPE'>
-    readonly modelId: FieldRef<"Keys", 'String'>
     readonly createdAt: FieldRef<"Keys", 'DateTime'>
     readonly updatedAt: FieldRef<"Keys", 'DateTime'>
   }
@@ -5738,8 +5717,20 @@ export namespace Prisma {
 
   export type AggregateModels = {
     _count: ModelsCountAggregateOutputType | null
+    _avg: ModelsAvgAggregateOutputType | null
+    _sum: ModelsSumAggregateOutputType | null
     _min: ModelsMinAggregateOutputType | null
     _max: ModelsMaxAggregateOutputType | null
+  }
+
+  export type ModelsAvgAggregateOutputType = {
+    speed: number | null
+    accuracy: number | null
+  }
+
+  export type ModelsSumAggregateOutputType = {
+    speed: number | null
+    accuracy: number | null
   }
 
   export type ModelsMinAggregateOutputType = {
@@ -5750,6 +5741,8 @@ export namespace Prisma {
     performance: $Enums.PERFORMANCE | null
     type: $Enums.TYPE | null
     pro: boolean | null
+    speed: number | null
+    accuracy: number | null
   }
 
   export type ModelsMaxAggregateOutputType = {
@@ -5760,6 +5753,8 @@ export namespace Prisma {
     performance: $Enums.PERFORMANCE | null
     type: $Enums.TYPE | null
     pro: boolean | null
+    speed: number | null
+    accuracy: number | null
   }
 
   export type ModelsCountAggregateOutputType = {
@@ -5770,9 +5765,21 @@ export namespace Prisma {
     performance: number
     type: number
     pro: number
+    speed: number
+    accuracy: number
     _all: number
   }
 
+
+  export type ModelsAvgAggregateInputType = {
+    speed?: true
+    accuracy?: true
+  }
+
+  export type ModelsSumAggregateInputType = {
+    speed?: true
+    accuracy?: true
+  }
 
   export type ModelsMinAggregateInputType = {
     id?: true
@@ -5782,6 +5789,8 @@ export namespace Prisma {
     performance?: true
     type?: true
     pro?: true
+    speed?: true
+    accuracy?: true
   }
 
   export type ModelsMaxAggregateInputType = {
@@ -5792,6 +5801,8 @@ export namespace Prisma {
     performance?: true
     type?: true
     pro?: true
+    speed?: true
+    accuracy?: true
   }
 
   export type ModelsCountAggregateInputType = {
@@ -5802,6 +5813,8 @@ export namespace Prisma {
     performance?: true
     type?: true
     pro?: true
+    speed?: true
+    accuracy?: true
     _all?: true
   }
 
@@ -5843,6 +5856,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ModelsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ModelsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ModelsMinAggregateInputType
@@ -5873,6 +5898,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ModelsCountAggregateInputType | true
+    _avg?: ModelsAvgAggregateInputType
+    _sum?: ModelsSumAggregateInputType
     _min?: ModelsMinAggregateInputType
     _max?: ModelsMaxAggregateInputType
   }
@@ -5885,7 +5912,11 @@ export namespace Prisma {
     performance: $Enums.PERFORMANCE
     type: $Enums.TYPE
     pro: boolean
+    speed: number
+    accuracy: number
     _count: ModelsCountAggregateOutputType | null
+    _avg: ModelsAvgAggregateOutputType | null
+    _sum: ModelsSumAggregateOutputType | null
     _min: ModelsMinAggregateOutputType | null
     _max: ModelsMaxAggregateOutputType | null
   }
@@ -5912,7 +5943,8 @@ export namespace Prisma {
     performance?: boolean
     type?: boolean
     pro?: boolean
-    Keys?: boolean | Models$KeysArgs<ExtArgs>
+    speed?: boolean
+    accuracy?: boolean
   }, ExtArgs["result"]["models"]>
 
   export type ModelsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5923,6 +5955,8 @@ export namespace Prisma {
     performance?: boolean
     type?: boolean
     pro?: boolean
+    speed?: boolean
+    accuracy?: boolean
   }, ExtArgs["result"]["models"]>
 
   export type ModelsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5933,6 +5967,8 @@ export namespace Prisma {
     performance?: boolean
     type?: boolean
     pro?: boolean
+    speed?: boolean
+    accuracy?: boolean
   }, ExtArgs["result"]["models"]>
 
   export type ModelsSelectScalar = {
@@ -5943,20 +5979,15 @@ export namespace Prisma {
     performance?: boolean
     type?: boolean
     pro?: boolean
+    speed?: boolean
+    accuracy?: boolean
   }
 
-  export type ModelsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "performance" | "type" | "pro", ExtArgs["result"]["models"]>
-  export type ModelsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Keys?: boolean | Models$KeysArgs<ExtArgs>
-  }
-  export type ModelsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type ModelsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ModelsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "performance" | "type" | "pro" | "speed" | "accuracy", ExtArgs["result"]["models"]>
 
   export type $ModelsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Models"
-    objects: {
-      Keys: Prisma.$KeysPayload<ExtArgs> | null
-    }
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
@@ -5965,6 +5996,8 @@ export namespace Prisma {
       performance: $Enums.PERFORMANCE
       type: $Enums.TYPE
       pro: boolean
+      speed: number
+      accuracy: number
     }, ExtArgs["result"]["models"]>
     composites: {}
   }
@@ -6359,7 +6392,6 @@ export namespace Prisma {
    */
   export interface Prisma__ModelsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Keys<T extends Models$KeysArgs<ExtArgs> = {}>(args?: Subset<T, Models$KeysArgs<ExtArgs>>): Prisma__KeysClient<$Result.GetResult<Prisma.$KeysPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6396,6 +6428,8 @@ export namespace Prisma {
     readonly performance: FieldRef<"Models", 'PERFORMANCE'>
     readonly type: FieldRef<"Models", 'TYPE'>
     readonly pro: FieldRef<"Models", 'Boolean'>
+    readonly speed: FieldRef<"Models", 'Float'>
+    readonly accuracy: FieldRef<"Models", 'Float'>
   }
     
 
@@ -6412,10 +6446,6 @@ export namespace Prisma {
      * Omit specific fields from the Models
      */
     omit?: ModelsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ModelsInclude<ExtArgs> | null
     /**
      * Filter, which Models to fetch.
      */
@@ -6435,10 +6465,6 @@ export namespace Prisma {
      */
     omit?: ModelsOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ModelsInclude<ExtArgs> | null
-    /**
      * Filter, which Models to fetch.
      */
     where: ModelsWhereUniqueInput
@@ -6456,10 +6482,6 @@ export namespace Prisma {
      * Omit specific fields from the Models
      */
     omit?: ModelsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ModelsInclude<ExtArgs> | null
     /**
      * Filter, which Models to fetch.
      */
@@ -6509,10 +6531,6 @@ export namespace Prisma {
      */
     omit?: ModelsOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ModelsInclude<ExtArgs> | null
-    /**
      * Filter, which Models to fetch.
      */
     where?: ModelsWhereInput
@@ -6561,10 +6579,6 @@ export namespace Prisma {
      */
     omit?: ModelsOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ModelsInclude<ExtArgs> | null
-    /**
      * Filter, which Models to fetch.
      */
     where?: ModelsWhereInput
@@ -6607,10 +6621,6 @@ export namespace Prisma {
      * Omit specific fields from the Models
      */
     omit?: ModelsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ModelsInclude<ExtArgs> | null
     /**
      * The data needed to create a Models.
      */
@@ -6659,10 +6669,6 @@ export namespace Prisma {
      * Omit specific fields from the Models
      */
     omit?: ModelsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ModelsInclude<ExtArgs> | null
     /**
      * The data needed to update a Models.
      */
@@ -6730,10 +6736,6 @@ export namespace Prisma {
      */
     omit?: ModelsOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ModelsInclude<ExtArgs> | null
-    /**
      * The filter to search for the Models to update in case it exists.
      */
     where: ModelsWhereUniqueInput
@@ -6760,10 +6762,6 @@ export namespace Prisma {
      */
     omit?: ModelsOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ModelsInclude<ExtArgs> | null
-    /**
      * Filter which Models to delete.
      */
     where: ModelsWhereUniqueInput
@@ -6784,25 +6782,6 @@ export namespace Prisma {
   }
 
   /**
-   * Models.Keys
-   */
-  export type Models$KeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Keys
-     */
-    select?: KeysSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Keys
-     */
-    omit?: KeysOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KeysInclude<ExtArgs> | null
-    where?: KeysWhereInput
-  }
-
-  /**
    * Models without action
    */
   export type ModelsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6814,10 +6793,6 @@ export namespace Prisma {
      * Omit specific fields from the Models
      */
     omit?: ModelsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ModelsInclude<ExtArgs> | null
   }
 
 
@@ -6867,7 +6842,6 @@ export namespace Prisma {
     apiKey: 'apiKey',
     authorId: 'authorId',
     type: 'type',
-    modelId: 'modelId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -6894,7 +6868,9 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     performance: 'performance',
     type: 'type',
-    pro: 'pro'
+    pro: 'pro',
+    speed: 'speed',
+    accuracy: 'accuracy'
   };
 
   export type ModelsScalarFieldEnum = (typeof ModelsScalarFieldEnum)[keyof typeof ModelsScalarFieldEnum]
@@ -7003,6 +6979,20 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -7172,11 +7162,9 @@ export namespace Prisma {
     apiKey?: StringFilter<"Keys"> | string
     authorId?: UuidFilter<"Keys"> | string
     type?: EnumTYPEFilter<"Keys"> | $Enums.TYPE
-    modelId?: UuidFilter<"Keys"> | string
     createdAt?: DateTimeFilter<"Keys"> | Date | string
     updatedAt?: DateTimeFilter<"Keys"> | Date | string
     author?: XOR<UsersScalarRelationFilter, UsersWhereInput>
-    model?: XOR<ModelsScalarRelationFilter, ModelsWhereInput>
   }
 
   export type KeysOrderByWithRelationInput = {
@@ -7184,34 +7172,29 @@ export namespace Prisma {
     apiKey?: SortOrder
     authorId?: SortOrder
     type?: SortOrder
-    modelId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     author?: UsersOrderByWithRelationInput
-    model?: ModelsOrderByWithRelationInput
   }
 
   export type KeysWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    authorId?: string
-    modelId?: string
+    apiKey?: string
     AND?: KeysWhereInput | KeysWhereInput[]
     OR?: KeysWhereInput[]
     NOT?: KeysWhereInput | KeysWhereInput[]
-    apiKey?: StringFilter<"Keys"> | string
+    authorId?: UuidFilter<"Keys"> | string
     type?: EnumTYPEFilter<"Keys"> | $Enums.TYPE
     createdAt?: DateTimeFilter<"Keys"> | Date | string
     updatedAt?: DateTimeFilter<"Keys"> | Date | string
     author?: XOR<UsersScalarRelationFilter, UsersWhereInput>
-    model?: XOR<ModelsScalarRelationFilter, ModelsWhereInput>
-  }, "id" | "id" | "authorId" | "modelId">
+  }, "id" | "id" | "apiKey">
 
   export type KeysOrderByWithAggregationInput = {
     id?: SortOrder
     apiKey?: SortOrder
     authorId?: SortOrder
     type?: SortOrder
-    modelId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: KeysCountOrderByAggregateInput
@@ -7227,7 +7210,6 @@ export namespace Prisma {
     apiKey?: StringWithAggregatesFilter<"Keys"> | string
     authorId?: UuidWithAggregatesFilter<"Keys"> | string
     type?: EnumTYPEWithAggregatesFilter<"Keys"> | $Enums.TYPE
-    modelId?: UuidWithAggregatesFilter<"Keys"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Keys"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Keys"> | Date | string
   }
@@ -7303,7 +7285,8 @@ export namespace Prisma {
     performance?: EnumPERFORMANCEFilter<"Models"> | $Enums.PERFORMANCE
     type?: EnumTYPEFilter<"Models"> | $Enums.TYPE
     pro?: BoolFilter<"Models"> | boolean
-    Keys?: XOR<KeysNullableScalarRelationFilter, KeysWhereInput> | null
+    speed?: FloatFilter<"Models"> | number
+    accuracy?: FloatFilter<"Models"> | number
   }
 
   export type ModelsOrderByWithRelationInput = {
@@ -7314,7 +7297,8 @@ export namespace Prisma {
     performance?: SortOrder
     type?: SortOrder
     pro?: SortOrder
-    Keys?: KeysOrderByWithRelationInput
+    speed?: SortOrder
+    accuracy?: SortOrder
   }
 
   export type ModelsWhereUniqueInput = Prisma.AtLeast<{
@@ -7328,7 +7312,8 @@ export namespace Prisma {
     performance?: EnumPERFORMANCEFilter<"Models"> | $Enums.PERFORMANCE
     type?: EnumTYPEFilter<"Models"> | $Enums.TYPE
     pro?: BoolFilter<"Models"> | boolean
-    Keys?: XOR<KeysNullableScalarRelationFilter, KeysWhereInput> | null
+    speed?: FloatFilter<"Models"> | number
+    accuracy?: FloatFilter<"Models"> | number
   }, "id" | "name">
 
   export type ModelsOrderByWithAggregationInput = {
@@ -7339,9 +7324,13 @@ export namespace Prisma {
     performance?: SortOrder
     type?: SortOrder
     pro?: SortOrder
+    speed?: SortOrder
+    accuracy?: SortOrder
     _count?: ModelsCountOrderByAggregateInput
+    _avg?: ModelsAvgOrderByAggregateInput
     _max?: ModelsMaxOrderByAggregateInput
     _min?: ModelsMinOrderByAggregateInput
+    _sum?: ModelsSumOrderByAggregateInput
   }
 
   export type ModelsScalarWhereWithAggregatesInput = {
@@ -7355,6 +7344,8 @@ export namespace Prisma {
     performance?: EnumPERFORMANCEWithAggregatesFilter<"Models"> | $Enums.PERFORMANCE
     type?: EnumTYPEWithAggregatesFilter<"Models"> | $Enums.TYPE
     pro?: BoolWithAggregatesFilter<"Models"> | boolean
+    speed?: FloatWithAggregatesFilter<"Models"> | number
+    accuracy?: FloatWithAggregatesFilter<"Models"> | number
   }
 
   export type UsersCreateInput = {
@@ -7522,7 +7513,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UsersCreateNestedOneWithoutApiKeysInput
-    model: ModelsCreateNestedOneWithoutKeysInput
   }
 
   export type KeysUncheckedCreateInput = {
@@ -7530,7 +7520,6 @@ export namespace Prisma {
     apiKey: string
     authorId: string
     type: $Enums.TYPE
-    modelId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7542,7 +7531,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UsersUpdateOneRequiredWithoutApiKeysNestedInput
-    model?: ModelsUpdateOneRequiredWithoutKeysNestedInput
   }
 
   export type KeysUncheckedUpdateInput = {
@@ -7550,7 +7538,6 @@ export namespace Prisma {
     apiKey?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
-    modelId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7560,7 +7547,6 @@ export namespace Prisma {
     apiKey: string
     authorId: string
     type: $Enums.TYPE
-    modelId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7578,7 +7564,6 @@ export namespace Prisma {
     apiKey?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
-    modelId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7653,7 +7638,8 @@ export namespace Prisma {
     performance: $Enums.PERFORMANCE
     type: $Enums.TYPE
     pro?: boolean
-    Keys?: KeysCreateNestedOneWithoutModelInput
+    speed?: number
+    accuracy?: number
   }
 
   export type ModelsUncheckedCreateInput = {
@@ -7664,7 +7650,8 @@ export namespace Prisma {
     performance: $Enums.PERFORMANCE
     type: $Enums.TYPE
     pro?: boolean
-    Keys?: KeysUncheckedCreateNestedOneWithoutModelInput
+    speed?: number
+    accuracy?: number
   }
 
   export type ModelsUpdateInput = {
@@ -7675,7 +7662,8 @@ export namespace Prisma {
     performance?: EnumPERFORMANCEFieldUpdateOperationsInput | $Enums.PERFORMANCE
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
     pro?: BoolFieldUpdateOperationsInput | boolean
-    Keys?: KeysUpdateOneWithoutModelNestedInput
+    speed?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
   }
 
   export type ModelsUncheckedUpdateInput = {
@@ -7686,7 +7674,8 @@ export namespace Prisma {
     performance?: EnumPERFORMANCEFieldUpdateOperationsInput | $Enums.PERFORMANCE
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
     pro?: BoolFieldUpdateOperationsInput | boolean
-    Keys?: KeysUncheckedUpdateOneWithoutModelNestedInput
+    speed?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
   }
 
   export type ModelsCreateManyInput = {
@@ -7697,6 +7686,8 @@ export namespace Prisma {
     performance: $Enums.PERFORMANCE
     type: $Enums.TYPE
     pro?: boolean
+    speed?: number
+    accuracy?: number
   }
 
   export type ModelsUpdateManyMutationInput = {
@@ -7707,6 +7698,8 @@ export namespace Prisma {
     performance?: EnumPERFORMANCEFieldUpdateOperationsInput | $Enums.PERFORMANCE
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
     pro?: BoolFieldUpdateOperationsInput | boolean
+    speed?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
   }
 
   export type ModelsUncheckedUpdateManyInput = {
@@ -7717,6 +7710,8 @@ export namespace Prisma {
     performance?: EnumPERFORMANCEFieldUpdateOperationsInput | $Enums.PERFORMANCE
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
     pro?: BoolFieldUpdateOperationsInput | boolean
+    speed?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -7964,17 +7959,11 @@ export namespace Prisma {
     not?: NestedEnumTYPEFilter<$PrismaModel> | $Enums.TYPE
   }
 
-  export type ModelsScalarRelationFilter = {
-    is?: ModelsWhereInput
-    isNot?: ModelsWhereInput
-  }
-
   export type KeysCountOrderByAggregateInput = {
     id?: SortOrder
     apiKey?: SortOrder
     authorId?: SortOrder
     type?: SortOrder
-    modelId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7984,7 +7973,6 @@ export namespace Prisma {
     apiKey?: SortOrder
     authorId?: SortOrder
     type?: SortOrder
-    modelId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7994,7 +7982,6 @@ export namespace Prisma {
     apiKey?: SortOrder
     authorId?: SortOrder
     type?: SortOrder
-    modelId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8054,9 +8041,15 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type KeysNullableScalarRelationFilter = {
-    is?: KeysWhereInput | null
-    isNot?: KeysWhereInput | null
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type ModelsCountOrderByAggregateInput = {
@@ -8067,6 +8060,13 @@ export namespace Prisma {
     performance?: SortOrder
     type?: SortOrder
     pro?: SortOrder
+    speed?: SortOrder
+    accuracy?: SortOrder
+  }
+
+  export type ModelsAvgOrderByAggregateInput = {
+    speed?: SortOrder
+    accuracy?: SortOrder
   }
 
   export type ModelsMaxOrderByAggregateInput = {
@@ -8077,6 +8077,8 @@ export namespace Prisma {
     performance?: SortOrder
     type?: SortOrder
     pro?: SortOrder
+    speed?: SortOrder
+    accuracy?: SortOrder
   }
 
   export type ModelsMinOrderByAggregateInput = {
@@ -8087,6 +8089,13 @@ export namespace Prisma {
     performance?: SortOrder
     type?: SortOrder
     pro?: SortOrder
+    speed?: SortOrder
+    accuracy?: SortOrder
+  }
+
+  export type ModelsSumOrderByAggregateInput = {
+    speed?: SortOrder
+    accuracy?: SortOrder
   }
 
   export type EnumPERFORMANCEWithAggregatesFilter<$PrismaModel = never> = {
@@ -8105,6 +8114,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type TransformationsCreateNestedManyWithoutAuthorInput = {
@@ -8269,12 +8294,6 @@ export namespace Prisma {
     connect?: UsersWhereUniqueInput
   }
 
-  export type ModelsCreateNestedOneWithoutKeysInput = {
-    create?: XOR<ModelsCreateWithoutKeysInput, ModelsUncheckedCreateWithoutKeysInput>
-    connectOrCreate?: ModelsCreateOrConnectWithoutKeysInput
-    connect?: ModelsWhereUniqueInput
-  }
-
   export type EnumTYPEFieldUpdateOperationsInput = {
     set?: $Enums.TYPE
   }
@@ -8285,14 +8304,6 @@ export namespace Prisma {
     upsert?: UsersUpsertWithoutApiKeysInput
     connect?: UsersWhereUniqueInput
     update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutApiKeysInput, UsersUpdateWithoutApiKeysInput>, UsersUncheckedUpdateWithoutApiKeysInput>
-  }
-
-  export type ModelsUpdateOneRequiredWithoutKeysNestedInput = {
-    create?: XOR<ModelsCreateWithoutKeysInput, ModelsUncheckedCreateWithoutKeysInput>
-    connectOrCreate?: ModelsCreateOrConnectWithoutKeysInput
-    upsert?: ModelsUpsertWithoutKeysInput
-    connect?: ModelsWhereUniqueInput
-    update?: XOR<XOR<ModelsUpdateToOneWithWhereWithoutKeysInput, ModelsUpdateWithoutKeysInput>, ModelsUncheckedUpdateWithoutKeysInput>
   }
 
   export type TransformationsCreatetagsInput = {
@@ -8318,18 +8329,6 @@ export namespace Prisma {
     update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutTransformationsInput, UsersUpdateWithoutTransformationsInput>, UsersUncheckedUpdateWithoutTransformationsInput>
   }
 
-  export type KeysCreateNestedOneWithoutModelInput = {
-    create?: XOR<KeysCreateWithoutModelInput, KeysUncheckedCreateWithoutModelInput>
-    connectOrCreate?: KeysCreateOrConnectWithoutModelInput
-    connect?: KeysWhereUniqueInput
-  }
-
-  export type KeysUncheckedCreateNestedOneWithoutModelInput = {
-    create?: XOR<KeysCreateWithoutModelInput, KeysUncheckedCreateWithoutModelInput>
-    connectOrCreate?: KeysCreateOrConnectWithoutModelInput
-    connect?: KeysWhereUniqueInput
-  }
-
   export type EnumPERFORMANCEFieldUpdateOperationsInput = {
     set?: $Enums.PERFORMANCE
   }
@@ -8338,24 +8337,12 @@ export namespace Prisma {
     set?: boolean
   }
 
-  export type KeysUpdateOneWithoutModelNestedInput = {
-    create?: XOR<KeysCreateWithoutModelInput, KeysUncheckedCreateWithoutModelInput>
-    connectOrCreate?: KeysCreateOrConnectWithoutModelInput
-    upsert?: KeysUpsertWithoutModelInput
-    disconnect?: KeysWhereInput | boolean
-    delete?: KeysWhereInput | boolean
-    connect?: KeysWhereUniqueInput
-    update?: XOR<XOR<KeysUpdateToOneWithWhereWithoutModelInput, KeysUpdateWithoutModelInput>, KeysUncheckedUpdateWithoutModelInput>
-  }
-
-  export type KeysUncheckedUpdateOneWithoutModelNestedInput = {
-    create?: XOR<KeysCreateWithoutModelInput, KeysUncheckedCreateWithoutModelInput>
-    connectOrCreate?: KeysCreateOrConnectWithoutModelInput
-    upsert?: KeysUpsertWithoutModelInput
-    disconnect?: KeysWhereInput | boolean
-    delete?: KeysWhereInput | boolean
-    connect?: KeysWhereUniqueInput
-    update?: XOR<XOR<KeysUpdateToOneWithWhereWithoutModelInput, KeysUpdateWithoutModelInput>, KeysUncheckedUpdateWithoutModelInput>
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -8538,6 +8525,17 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedEnumPERFORMANCEWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.PERFORMANCE | EnumPERFORMANCEFieldRefInput<$PrismaModel>
     in?: $Enums.PERFORMANCE[] | ListEnumPERFORMANCEFieldRefInput<$PrismaModel>
@@ -8554,6 +8552,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type TransformationsCreateWithoutAuthorInput = {
@@ -8588,14 +8602,12 @@ export namespace Prisma {
     type: $Enums.TYPE
     createdAt?: Date | string
     updatedAt?: Date | string
-    model: ModelsCreateNestedOneWithoutKeysInput
   }
 
   export type KeysUncheckedCreateWithoutAuthorInput = {
     id?: string
     apiKey: string
     type: $Enums.TYPE
-    modelId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8688,7 +8700,6 @@ export namespace Prisma {
     apiKey?: StringFilter<"Keys"> | string
     authorId?: UuidFilter<"Keys"> | string
     type?: EnumTYPEFilter<"Keys"> | $Enums.TYPE
-    modelId?: UuidFilter<"Keys"> | string
     createdAt?: DateTimeFilter<"Keys"> | Date | string
     updatedAt?: DateTimeFilter<"Keys"> | Date | string
   }
@@ -8826,31 +8837,6 @@ export namespace Prisma {
     create: XOR<UsersCreateWithoutApiKeysInput, UsersUncheckedCreateWithoutApiKeysInput>
   }
 
-  export type ModelsCreateWithoutKeysInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    performance: $Enums.PERFORMANCE
-    type: $Enums.TYPE
-    pro?: boolean
-  }
-
-  export type ModelsUncheckedCreateWithoutKeysInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    performance: $Enums.PERFORMANCE
-    type: $Enums.TYPE
-    pro?: boolean
-  }
-
-  export type ModelsCreateOrConnectWithoutKeysInput = {
-    where: ModelsWhereUniqueInput
-    create: XOR<ModelsCreateWithoutKeysInput, ModelsUncheckedCreateWithoutKeysInput>
-  }
-
   export type UsersUpsertWithoutApiKeysInput = {
     update: XOR<UsersUpdateWithoutApiKeysInput, UsersUncheckedUpdateWithoutApiKeysInput>
     create: XOR<UsersCreateWithoutApiKeysInput, UsersUncheckedCreateWithoutApiKeysInput>
@@ -8888,37 +8874,6 @@ export namespace Prisma {
     role?: EnumROLEFieldUpdateOperationsInput | $Enums.ROLE
     transformations?: TransformationsUncheckedUpdateManyWithoutAuthorNestedInput
     Tags?: TagsUncheckedUpdateManyWithoutAuthorNestedInput
-  }
-
-  export type ModelsUpsertWithoutKeysInput = {
-    update: XOR<ModelsUpdateWithoutKeysInput, ModelsUncheckedUpdateWithoutKeysInput>
-    create: XOR<ModelsCreateWithoutKeysInput, ModelsUncheckedCreateWithoutKeysInput>
-    where?: ModelsWhereInput
-  }
-
-  export type ModelsUpdateToOneWithWhereWithoutKeysInput = {
-    where?: ModelsWhereInput
-    data: XOR<ModelsUpdateWithoutKeysInput, ModelsUncheckedUpdateWithoutKeysInput>
-  }
-
-  export type ModelsUpdateWithoutKeysInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    performance?: EnumPERFORMANCEFieldUpdateOperationsInput | $Enums.PERFORMANCE
-    type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
-    pro?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type ModelsUncheckedUpdateWithoutKeysInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    performance?: EnumPERFORMANCEFieldUpdateOperationsInput | $Enums.PERFORMANCE
-    type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
-    pro?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UsersCreateWithoutTransformationsInput = {
@@ -8993,58 +8948,6 @@ export namespace Prisma {
     Tags?: TagsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
-  export type KeysCreateWithoutModelInput = {
-    id?: string
-    apiKey: string
-    type: $Enums.TYPE
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    author: UsersCreateNestedOneWithoutApiKeysInput
-  }
-
-  export type KeysUncheckedCreateWithoutModelInput = {
-    id?: string
-    apiKey: string
-    authorId: string
-    type: $Enums.TYPE
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type KeysCreateOrConnectWithoutModelInput = {
-    where: KeysWhereUniqueInput
-    create: XOR<KeysCreateWithoutModelInput, KeysUncheckedCreateWithoutModelInput>
-  }
-
-  export type KeysUpsertWithoutModelInput = {
-    update: XOR<KeysUpdateWithoutModelInput, KeysUncheckedUpdateWithoutModelInput>
-    create: XOR<KeysCreateWithoutModelInput, KeysUncheckedCreateWithoutModelInput>
-    where?: KeysWhereInput
-  }
-
-  export type KeysUpdateToOneWithWhereWithoutModelInput = {
-    where?: KeysWhereInput
-    data: XOR<KeysUpdateWithoutModelInput, KeysUncheckedUpdateWithoutModelInput>
-  }
-
-  export type KeysUpdateWithoutModelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    apiKey?: StringFieldUpdateOperationsInput | string
-    type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UsersUpdateOneRequiredWithoutApiKeysNestedInput
-  }
-
-  export type KeysUncheckedUpdateWithoutModelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    apiKey?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
-    type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type TransformationsCreateManyAuthorInput = {
     id?: string
     content: string
@@ -9057,7 +8960,6 @@ export namespace Prisma {
     id?: string
     apiKey: string
     type: $Enums.TYPE
-    modelId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9100,14 +9002,12 @@ export namespace Prisma {
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    model?: ModelsUpdateOneRequiredWithoutKeysNestedInput
   }
 
   export type KeysUncheckedUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     apiKey?: StringFieldUpdateOperationsInput | string
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
-    modelId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9116,7 +9016,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     apiKey?: StringFieldUpdateOperationsInput | string
     type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
-    modelId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
