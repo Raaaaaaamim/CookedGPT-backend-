@@ -154,9 +154,12 @@ exports.Prisma.TransformationsScalarFieldEnum = {
   id: 'id',
   authorId: 'authorId',
   content: 'content',
+  input: 'input',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  tags: 'tags'
+  tags: 'tags',
+  modelName: 'modelName',
+  modelId: 'modelId'
 };
 
 exports.Prisma.ModelsScalarFieldEnum = {

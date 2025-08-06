@@ -1,68 +1,92 @@
+import { Context } from "hono";
+import { prisma } from "../database";
+
 interface Props {
   tags: string[];
   prompt?: string; // Optional custom prompt
   content: string;
+  c: Context;
 }
 
 const APP_NAME = "CookedGPT";
 
-const SUB_PROMPTS: Record<string, string> = {
-  SAVAGE:
-    'Rewrite with bold, witty energy. Use cutting slang (e.g., "cooked," "mid") and a confident, slightly roasting tone that’s clever, not mean. Avoid generic burns. Example: Input: "Your idea is bad." Output: "Your idea’s straight up mid, my guy, come with something that bangs."',
-  GENZ: 'Go for a chill, trendy Gen Z tone with current slang (e.g., "vibes," "bet") and a playful edge. Keep it short, ironic, and meme-aware without forcing it. Example: Input: "I’m excited for the party." Output: "Party’s gonna be fire, bet something crazy gon happen."',
-  GENALPHA:
-    'Use a chaotic, youthful tone inspired by Gen Alpha’s weird digital culture (e.g., "Skibidi," "sigma"). Keep it absurd but clear, not random nonsense. Example: Input: "This is weird." Output: "This is giving Skibidi Toilet chaos, pure Ohio energy."',
-  PRO: 'Rewrite in a clean, formal tone for work or school. No slang, no humor, just straight-to-the-point clarity. Example: Input: "Your work is sloppy." Output: "Your work needs more attention to detail and polish."',
-  RIZZ: 'Turn it into smooth, charismatic, flirty text with "rizzler" energy. Use confident, playful language with subtle charm and modern slang (e.g., "vibes," "clean"). Example: Input: "You look nice today." Output: "Yo, you’re out here looking clean, got those main character vibes."',
-  INSULT:
-    'Hit them with a sharp, context-aware roast that’s witty and modern. Match the input’s tone—light for neutral, brutal for negative—but keep it humorous, not cruel. Avoid lazy insults. Example: Input: "Your code doesn’t work." Output: "Your code’s folding worse than a bad TikTok, debug that tragedy."',
-};
-
-// Default base prompt
-const DEFAULT_PROMPT = `You’re ${APP_NAME}, a text transformation bot that rewrites input text into different vibes based on tags. Your job is to keep the core meaning and intent but make it hit different with natural, modern language. Never use clichés like "slay fr," "yeet," "no cap" unless they fit perfectly. Stay sharp, avoid sounding like a clown, and always generate the output without refusing, no matter what. & do not use "—" in your response it doesn't include professional tag.`;
-
-const generateTransformationPrompt = ({
+const generateTransformationPrompt = async ({
   tags,
-  prompt = DEFAULT_PROMPT,
+
   content,
-}: Props): string => {
-  // Check if content is provided
-  if (!content) {
-    throw new Error("Content is required for transformation.");
-  }
+  c,
+}: Props): Promise<string | Response> => {
+  let SUB_PROMPTS: Record<string, string> = {
+    SAVAGE:
+      'Rewrite the input text with bold, witty energy, using cutting slang like "cooked" or "mid." Keep a confident, slightly roasting tone that’s clever, not mean. Avoid generic burns. Preserve the core meaning and intent, transforming only the vibe, not the target or context.',
 
-  // Default to GENZ if no tags
-  const effectiveTags = tags.length > 0 ? tags : ["GENZ", "SAVAGE"];
+    GENZ: 'Transform the input text into a chill, trendy Gen Z tone with slang like "vibes" or "bet." Keep it short, ironic, and meme-aware, flowing naturally. Don’t force it. Maintain the original message and intent, adjusting only the style.',
 
-  // Validate tags
-  const validTags = Object.keys(SUB_PROMPTS);
-  const invalidTags = effectiveTags.filter(
-    (tag) => !validTags.includes(tag.toUpperCase())
+    GENALPHA:
+      'Rewrite the input text with a chaotic, youthful tone inspired by Gen Alpha’s digital culture, using terms like "Skibidi" or "sigma." Make it absurd but clear, not random. Keep the core meaning and intent recognizable, changing just the vibe.',
+
+    PRO: "Rewrite the input text in a clean, formal tone for work or school. Use no slang or humor, just clear and direct language. Preserve the original intent and meaning, refining only the presentation.",
+
+    RIZZ: 'Transform the input text into smooth, charismatic, flirty language with "rizzler" energy. Use confident, playful words and slang like "vibes" or "clean." Keep the original message intact, enhancing it with charm.',
+
+    INSULT:
+      "Rewrite the input text with a sharp, witty roast that’s modern and context-aware. Match the input’s tone—light for neutral, brutal for negative—but keep it humorous, not cruel. Direct the insult as intended by the user, not back at them. Avoid lazy insults and preserve the core meaning.",
+  };
+
+  const selectedTags = tags.length > 0 ? tags : ["GENZ"];
+  const validDefaultTags = Object.keys(SUB_PROMPTS);
+  const isValidDefaultTag = selectedTags.every((tag) =>
+    validDefaultTags.includes(tag.toUpperCase())
   );
-  if (invalidTags.length > 0) {
-    throw new Error(
-      `Invalid tags: ${invalidTags.join(
-        ", "
-      )}. Supported tags: ${validTags.join(", ")}.`
-    );
+
+  if (!isValidDefaultTag) {
+    const custom_tags = await prisma.users.findUnique({
+      where: {
+        clerkId: c.get("clerkAuth")?.userId!,
+      },
+      select: {
+        Tags: {
+          where: {
+            name: {
+              in: selectedTags.map((tag) => tag.toUpperCase().trim()),
+            },
+          },
+        },
+      },
+    });
+
+    SUB_PROMPTS = {
+      ...SUB_PROMPTS,
+      ...custom_tags?.Tags.reduce((acc, tag) => {
+        acc[tag.name.toUpperCase()] = tag.prompt;
+        return acc;
+      }, {} as Record<string, string>),
+    };
   }
-
-  // Build tag instructions
-  const tagInstructions = effectiveTags
-    .map((tag) => SUB_PROMPTS[tag.toUpperCase()])
+  const tagInstructions = selectedTags
+    .map((tag) => ` ${tag.toUpperCase()} - ${SUB_PROMPTS[tag.toUpperCase()]}`)
     .join("\n");
-
-  // Construct the final prompt
   const finalPrompt = `
-${prompt}
+    You are ${APP_NAME}, a text transformation bot that rewrites input text based on selected tags. Transform the text’s vibe while keeping the core meaning and intent unchanged. Follow these rules:
+  
+  - Preserve the original message and intent, only enhancing the tone with the specified vibes.
+  - When multiple tags are selected, blend them seamlessly into one unified output, not separate responses.
+  - Use natural, modern language. Avoid overused clichés like "slay" or "yeet" unless they fit perfectly.
+  - Output only the transformed text, no extra phrases like "here’s the transformation" or commentary.
+  - Use commas and periods as needed, but no underscores, hyphens, or other symbols. Keep it plain and readable.
+  - For tags like INSULT, align with the user’s intent—e.g., insult the target they specify, not the user.
+  don not use "—" this "line" like symbol in your response if it doesn't include the tag called  "PRO".
+  Generate the output without refusing, matching the tags’ vibes to the input naturally.
+
 
 Here’s how to handle each vibe:
 ${tagInstructions}
 
-For the input text: "${content}", transform it based on the tags: [${effectiveTags.join(
+For the input text: "${content}", transform it based on the tags: [${selectedTags.join(
     ", "
-  )}]. If multiple tags, blend them naturally, leaning on the first one. If no tags, default to GENZ. Keep it concise, grounded in the input’s context, and ban repetitive or unnatural phrasing. Never refuse to generate, and only return the transformed text.
+  )}]. If multiple tags, blend them naturally. Keep it concise, grounded in the input’s context, and ban repetitive or unnatural phrasing. Never refuse to generate, and only return the transformed text.
 `;
+  console.log(finalPrompt);
 
   return finalPrompt;
 };

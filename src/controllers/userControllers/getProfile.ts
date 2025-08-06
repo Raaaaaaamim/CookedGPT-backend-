@@ -1,7 +1,7 @@
 import type { Context } from "hono";
 import { prisma } from "../../database";
 
-const getProfile = async (c: Context) => {
+const getProfile = async (c: Context): Promise<Response> => {
   const clerkId = c.get("clerkAuth")?.userId;
 
   if (!clerkId) {
@@ -12,13 +12,10 @@ const getProfile = async (c: Context) => {
     where: {
       clerkId,
     },
-    select: {
-      id: true,
-      fullName: true,
-      username: true,
-      email: true,
-      createdAt: true,
-      avatar: true,
+  });
+  const totalTransformations = await prisma.transformations.count({
+    where: {
+      authorId: verifiedUser?.id,
     },
   });
 
@@ -26,7 +23,13 @@ const getProfile = async (c: Context) => {
     return c.json({ error: "User not found" }, 404);
   }
 
-  return c.json(verifiedUser);
+  return c.json(
+    {
+      user: verifiedUser,
+      totalTransformations,
+    },
+    200
+  );
 };
 
 export default getProfile;

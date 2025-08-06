@@ -3,6 +3,7 @@ import { prisma } from "../../database";
 
 const getAllLLM = async (c: Context) => {
   console.log(c.req.query());
+
   const { page, limit } = c.req.query();
   if (page) {
     const items = Number(limit) || 5;

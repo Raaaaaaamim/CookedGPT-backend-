@@ -1321,6 +1321,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type ModelsCountOutputType
+   */
+
+  export type ModelsCountOutputType = {
+    transformations: number
+  }
+
+  export type ModelsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transformations?: boolean | ModelsCountOutputTypeCountTransformationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ModelsCountOutputType without action
+   */
+  export type ModelsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModelsCountOutputType
+     */
+    select?: ModelsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ModelsCountOutputType without action
+   */
+  export type ModelsCountOutputTypeCountTransformationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TransformationsWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -4658,25 +4689,34 @@ export namespace Prisma {
     id: string | null
     authorId: string | null
     content: string | null
+    input: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    modelName: string | null
+    modelId: string | null
   }
 
   export type TransformationsMaxAggregateOutputType = {
     id: string | null
     authorId: string | null
     content: string | null
+    input: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    modelName: string | null
+    modelId: string | null
   }
 
   export type TransformationsCountAggregateOutputType = {
     id: number
     authorId: number
     content: number
+    input: number
     createdAt: number
     updatedAt: number
     tags: number
+    modelName: number
+    modelId: number
     _all: number
   }
 
@@ -4685,25 +4725,34 @@ export namespace Prisma {
     id?: true
     authorId?: true
     content?: true
+    input?: true
     createdAt?: true
     updatedAt?: true
+    modelName?: true
+    modelId?: true
   }
 
   export type TransformationsMaxAggregateInputType = {
     id?: true
     authorId?: true
     content?: true
+    input?: true
     createdAt?: true
     updatedAt?: true
+    modelName?: true
+    modelId?: true
   }
 
   export type TransformationsCountAggregateInputType = {
     id?: true
     authorId?: true
     content?: true
+    input?: true
     createdAt?: true
     updatedAt?: true
     tags?: true
+    modelName?: true
+    modelId?: true
     _all?: true
   }
 
@@ -4783,9 +4832,12 @@ export namespace Prisma {
     id: string
     authorId: string
     content: string
+    input: string
     createdAt: Date
     updatedAt: Date
     tags: string[]
+    modelName: string
+    modelId: string
     _count: TransformationsCountAggregateOutputType | null
     _min: TransformationsMinAggregateOutputType | null
     _max: TransformationsMaxAggregateOutputType | null
@@ -4809,64 +4861,86 @@ export namespace Prisma {
     id?: boolean
     authorId?: boolean
     content?: boolean
+    input?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tags?: boolean
+    modelName?: boolean
+    modelId?: boolean
     author?: boolean | UsersDefaultArgs<ExtArgs>
+    model?: boolean | ModelsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["transformations"]>
 
   export type TransformationsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     authorId?: boolean
     content?: boolean
+    input?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tags?: boolean
+    modelName?: boolean
+    modelId?: boolean
     author?: boolean | UsersDefaultArgs<ExtArgs>
+    model?: boolean | ModelsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["transformations"]>
 
   export type TransformationsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     authorId?: boolean
     content?: boolean
+    input?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tags?: boolean
+    modelName?: boolean
+    modelId?: boolean
     author?: boolean | UsersDefaultArgs<ExtArgs>
+    model?: boolean | ModelsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["transformations"]>
 
   export type TransformationsSelectScalar = {
     id?: boolean
     authorId?: boolean
     content?: boolean
+    input?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tags?: boolean
+    modelName?: boolean
+    modelId?: boolean
   }
 
-  export type TransformationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "content" | "createdAt" | "updatedAt" | "tags", ExtArgs["result"]["transformations"]>
+  export type TransformationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "content" | "input" | "createdAt" | "updatedAt" | "tags" | "modelName" | "modelId", ExtArgs["result"]["transformations"]>
   export type TransformationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UsersDefaultArgs<ExtArgs>
+    model?: boolean | ModelsDefaultArgs<ExtArgs>
   }
   export type TransformationsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UsersDefaultArgs<ExtArgs>
+    model?: boolean | ModelsDefaultArgs<ExtArgs>
   }
   export type TransformationsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UsersDefaultArgs<ExtArgs>
+    model?: boolean | ModelsDefaultArgs<ExtArgs>
   }
 
   export type $TransformationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Transformations"
     objects: {
       author: Prisma.$UsersPayload<ExtArgs>
+      model: Prisma.$ModelsPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       authorId: string
       content: string
+      input: string
       createdAt: Date
       updatedAt: Date
       tags: string[]
+      modelName: string
+      modelId: string
     }, ExtArgs["result"]["transformations"]>
     composites: {}
   }
@@ -5262,6 +5336,7 @@ export namespace Prisma {
   export interface Prisma__TransformationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     author<T extends UsersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsersDefaultArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    model<T extends ModelsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ModelsDefaultArgs<ExtArgs>>): Prisma__ModelsClient<$Result.GetResult<Prisma.$ModelsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5294,9 +5369,12 @@ export namespace Prisma {
     readonly id: FieldRef<"Transformations", 'String'>
     readonly authorId: FieldRef<"Transformations", 'String'>
     readonly content: FieldRef<"Transformations", 'String'>
+    readonly input: FieldRef<"Transformations", 'String'>
     readonly createdAt: FieldRef<"Transformations", 'DateTime'>
     readonly updatedAt: FieldRef<"Transformations", 'DateTime'>
     readonly tags: FieldRef<"Transformations", 'String[]'>
+    readonly modelName: FieldRef<"Transformations", 'String'>
+    readonly modelId: FieldRef<"Transformations", 'String'>
   }
     
 
@@ -5945,6 +6023,8 @@ export namespace Prisma {
     pro?: boolean
     speed?: boolean
     accuracy?: boolean
+    transformations?: boolean | Models$transformationsArgs<ExtArgs>
+    _count?: boolean | ModelsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["models"]>
 
   export type ModelsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5984,10 +6064,18 @@ export namespace Prisma {
   }
 
   export type ModelsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "performance" | "type" | "pro" | "speed" | "accuracy", ExtArgs["result"]["models"]>
+  export type ModelsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transformations?: boolean | Models$transformationsArgs<ExtArgs>
+    _count?: boolean | ModelsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ModelsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ModelsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $ModelsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Models"
-    objects: {}
+    objects: {
+      transformations: Prisma.$TransformationsPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
@@ -6392,6 +6480,7 @@ export namespace Prisma {
    */
   export interface Prisma__ModelsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    transformations<T extends Models$transformationsArgs<ExtArgs> = {}>(args?: Subset<T, Models$transformationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransformationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6447,6 +6536,10 @@ export namespace Prisma {
      */
     omit?: ModelsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModelsInclude<ExtArgs> | null
+    /**
      * Filter, which Models to fetch.
      */
     where: ModelsWhereUniqueInput
@@ -6465,6 +6558,10 @@ export namespace Prisma {
      */
     omit?: ModelsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModelsInclude<ExtArgs> | null
+    /**
      * Filter, which Models to fetch.
      */
     where: ModelsWhereUniqueInput
@@ -6482,6 +6579,10 @@ export namespace Prisma {
      * Omit specific fields from the Models
      */
     omit?: ModelsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModelsInclude<ExtArgs> | null
     /**
      * Filter, which Models to fetch.
      */
@@ -6531,6 +6632,10 @@ export namespace Prisma {
      */
     omit?: ModelsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModelsInclude<ExtArgs> | null
+    /**
      * Filter, which Models to fetch.
      */
     where?: ModelsWhereInput
@@ -6579,6 +6684,10 @@ export namespace Prisma {
      */
     omit?: ModelsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModelsInclude<ExtArgs> | null
+    /**
      * Filter, which Models to fetch.
      */
     where?: ModelsWhereInput
@@ -6621,6 +6730,10 @@ export namespace Prisma {
      * Omit specific fields from the Models
      */
     omit?: ModelsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModelsInclude<ExtArgs> | null
     /**
      * The data needed to create a Models.
      */
@@ -6669,6 +6782,10 @@ export namespace Prisma {
      * Omit specific fields from the Models
      */
     omit?: ModelsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModelsInclude<ExtArgs> | null
     /**
      * The data needed to update a Models.
      */
@@ -6736,6 +6853,10 @@ export namespace Prisma {
      */
     omit?: ModelsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModelsInclude<ExtArgs> | null
+    /**
      * The filter to search for the Models to update in case it exists.
      */
     where: ModelsWhereUniqueInput
@@ -6762,6 +6883,10 @@ export namespace Prisma {
      */
     omit?: ModelsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModelsInclude<ExtArgs> | null
+    /**
      * Filter which Models to delete.
      */
     where: ModelsWhereUniqueInput
@@ -6782,6 +6907,30 @@ export namespace Prisma {
   }
 
   /**
+   * Models.transformations
+   */
+  export type Models$transformationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Transformations
+     */
+    select?: TransformationsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Transformations
+     */
+    omit?: TransformationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TransformationsInclude<ExtArgs> | null
+    where?: TransformationsWhereInput
+    orderBy?: TransformationsOrderByWithRelationInput | TransformationsOrderByWithRelationInput[]
+    cursor?: TransformationsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TransformationsScalarFieldEnum | TransformationsScalarFieldEnum[]
+  }
+
+  /**
    * Models without action
    */
   export type ModelsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6793,6 +6942,10 @@ export namespace Prisma {
      * Omit specific fields from the Models
      */
     omit?: ModelsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModelsInclude<ExtArgs> | null
   }
 
 
@@ -6853,9 +7006,12 @@ export namespace Prisma {
     id: 'id',
     authorId: 'authorId',
     content: 'content',
+    input: 'input',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    tags: 'tags'
+    tags: 'tags',
+    modelName: 'modelName',
+    modelId: 'modelId'
   };
 
   export type TransformationsScalarFieldEnum = (typeof TransformationsScalarFieldEnum)[keyof typeof TransformationsScalarFieldEnum]
@@ -7221,20 +7377,28 @@ export namespace Prisma {
     id?: UuidFilter<"Transformations"> | string
     authorId?: UuidFilter<"Transformations"> | string
     content?: StringFilter<"Transformations"> | string
+    input?: StringFilter<"Transformations"> | string
     createdAt?: DateTimeFilter<"Transformations"> | Date | string
     updatedAt?: DateTimeFilter<"Transformations"> | Date | string
     tags?: StringNullableListFilter<"Transformations">
+    modelName?: StringFilter<"Transformations"> | string
+    modelId?: UuidFilter<"Transformations"> | string
     author?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+    model?: XOR<ModelsScalarRelationFilter, ModelsWhereInput>
   }
 
   export type TransformationsOrderByWithRelationInput = {
     id?: SortOrder
     authorId?: SortOrder
     content?: SortOrder
+    input?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     tags?: SortOrder
+    modelName?: SortOrder
+    modelId?: SortOrder
     author?: UsersOrderByWithRelationInput
+    model?: ModelsOrderByWithRelationInput
   }
 
   export type TransformationsWhereUniqueInput = Prisma.AtLeast<{
@@ -7244,19 +7408,26 @@ export namespace Prisma {
     NOT?: TransformationsWhereInput | TransformationsWhereInput[]
     authorId?: UuidFilter<"Transformations"> | string
     content?: StringFilter<"Transformations"> | string
+    input?: StringFilter<"Transformations"> | string
     createdAt?: DateTimeFilter<"Transformations"> | Date | string
     updatedAt?: DateTimeFilter<"Transformations"> | Date | string
     tags?: StringNullableListFilter<"Transformations">
+    modelName?: StringFilter<"Transformations"> | string
+    modelId?: UuidFilter<"Transformations"> | string
     author?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+    model?: XOR<ModelsScalarRelationFilter, ModelsWhereInput>
   }, "id">
 
   export type TransformationsOrderByWithAggregationInput = {
     id?: SortOrder
     authorId?: SortOrder
     content?: SortOrder
+    input?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     tags?: SortOrder
+    modelName?: SortOrder
+    modelId?: SortOrder
     _count?: TransformationsCountOrderByAggregateInput
     _max?: TransformationsMaxOrderByAggregateInput
     _min?: TransformationsMinOrderByAggregateInput
@@ -7269,9 +7440,12 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter<"Transformations"> | string
     authorId?: UuidWithAggregatesFilter<"Transformations"> | string
     content?: StringWithAggregatesFilter<"Transformations"> | string
+    input?: StringWithAggregatesFilter<"Transformations"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Transformations"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Transformations"> | Date | string
     tags?: StringNullableListFilter<"Transformations">
+    modelName?: StringWithAggregatesFilter<"Transformations"> | string
+    modelId?: UuidWithAggregatesFilter<"Transformations"> | string
   }
 
   export type ModelsWhereInput = {
@@ -7287,6 +7461,7 @@ export namespace Prisma {
     pro?: BoolFilter<"Models"> | boolean
     speed?: FloatFilter<"Models"> | number
     accuracy?: FloatFilter<"Models"> | number
+    transformations?: TransformationsListRelationFilter
   }
 
   export type ModelsOrderByWithRelationInput = {
@@ -7299,6 +7474,7 @@ export namespace Prisma {
     pro?: SortOrder
     speed?: SortOrder
     accuracy?: SortOrder
+    transformations?: TransformationsOrderByRelationAggregateInput
   }
 
   export type ModelsWhereUniqueInput = Prisma.AtLeast<{
@@ -7314,6 +7490,7 @@ export namespace Prisma {
     pro?: BoolFilter<"Models"> | boolean
     speed?: FloatFilter<"Models"> | number
     accuracy?: FloatFilter<"Models"> | number
+    transformations?: TransformationsListRelationFilter
   }, "id" | "name">
 
   export type ModelsOrderByWithAggregationInput = {
@@ -7571,63 +7748,83 @@ export namespace Prisma {
   export type TransformationsCreateInput = {
     id?: string
     content: string
+    input: string
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TransformationsCreatetagsInput | string[]
+    modelName: string
     author: UsersCreateNestedOneWithoutTransformationsInput
+    model: ModelsCreateNestedOneWithoutTransformationsInput
   }
 
   export type TransformationsUncheckedCreateInput = {
     id?: string
     authorId: string
     content: string
+    input: string
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TransformationsCreatetagsInput | string[]
+    modelName: string
+    modelId: string
   }
 
   export type TransformationsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    input?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TransformationsUpdatetagsInput | string[]
+    modelName?: StringFieldUpdateOperationsInput | string
     author?: UsersUpdateOneRequiredWithoutTransformationsNestedInput
+    model?: ModelsUpdateOneRequiredWithoutTransformationsNestedInput
   }
 
   export type TransformationsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    input?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TransformationsUpdatetagsInput | string[]
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
   }
 
   export type TransformationsCreateManyInput = {
     id?: string
     authorId: string
     content: string
+    input: string
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TransformationsCreatetagsInput | string[]
+    modelName: string
+    modelId: string
   }
 
   export type TransformationsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    input?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TransformationsUpdatetagsInput | string[]
+    modelName?: StringFieldUpdateOperationsInput | string
   }
 
   export type TransformationsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    input?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TransformationsUpdatetagsInput | string[]
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ModelsCreateInput = {
@@ -7640,6 +7837,7 @@ export namespace Prisma {
     pro?: boolean
     speed?: number
     accuracy?: number
+    transformations?: TransformationsCreateNestedManyWithoutModelInput
   }
 
   export type ModelsUncheckedCreateInput = {
@@ -7652,6 +7850,7 @@ export namespace Prisma {
     pro?: boolean
     speed?: number
     accuracy?: number
+    transformations?: TransformationsUncheckedCreateNestedManyWithoutModelInput
   }
 
   export type ModelsUpdateInput = {
@@ -7664,6 +7863,7 @@ export namespace Prisma {
     pro?: BoolFieldUpdateOperationsInput | boolean
     speed?: FloatFieldUpdateOperationsInput | number
     accuracy?: FloatFieldUpdateOperationsInput | number
+    transformations?: TransformationsUpdateManyWithoutModelNestedInput
   }
 
   export type ModelsUncheckedUpdateInput = {
@@ -7676,6 +7876,7 @@ export namespace Prisma {
     pro?: BoolFieldUpdateOperationsInput | boolean
     speed?: FloatFieldUpdateOperationsInput | number
     accuracy?: FloatFieldUpdateOperationsInput | number
+    transformations?: TransformationsUncheckedUpdateManyWithoutModelNestedInput
   }
 
   export type ModelsCreateManyInput = {
@@ -8004,29 +8205,43 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
+  export type ModelsScalarRelationFilter = {
+    is?: ModelsWhereInput
+    isNot?: ModelsWhereInput
+  }
+
   export type TransformationsCountOrderByAggregateInput = {
     id?: SortOrder
     authorId?: SortOrder
     content?: SortOrder
+    input?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     tags?: SortOrder
+    modelName?: SortOrder
+    modelId?: SortOrder
   }
 
   export type TransformationsMaxOrderByAggregateInput = {
     id?: SortOrder
     authorId?: SortOrder
     content?: SortOrder
+    input?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    modelName?: SortOrder
+    modelId?: SortOrder
   }
 
   export type TransformationsMinOrderByAggregateInput = {
     id?: SortOrder
     authorId?: SortOrder
     content?: SortOrder
+    input?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    modelName?: SortOrder
+    modelId?: SortOrder
   }
 
   export type EnumPERFORMANCEFilter<$PrismaModel = never> = {
@@ -8316,6 +8531,12 @@ export namespace Prisma {
     connect?: UsersWhereUniqueInput
   }
 
+  export type ModelsCreateNestedOneWithoutTransformationsInput = {
+    create?: XOR<ModelsCreateWithoutTransformationsInput, ModelsUncheckedCreateWithoutTransformationsInput>
+    connectOrCreate?: ModelsCreateOrConnectWithoutTransformationsInput
+    connect?: ModelsWhereUniqueInput
+  }
+
   export type TransformationsUpdatetagsInput = {
     set?: string[]
     push?: string | string[]
@@ -8327,6 +8548,28 @@ export namespace Prisma {
     upsert?: UsersUpsertWithoutTransformationsInput
     connect?: UsersWhereUniqueInput
     update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutTransformationsInput, UsersUpdateWithoutTransformationsInput>, UsersUncheckedUpdateWithoutTransformationsInput>
+  }
+
+  export type ModelsUpdateOneRequiredWithoutTransformationsNestedInput = {
+    create?: XOR<ModelsCreateWithoutTransformationsInput, ModelsUncheckedCreateWithoutTransformationsInput>
+    connectOrCreate?: ModelsCreateOrConnectWithoutTransformationsInput
+    upsert?: ModelsUpsertWithoutTransformationsInput
+    connect?: ModelsWhereUniqueInput
+    update?: XOR<XOR<ModelsUpdateToOneWithWhereWithoutTransformationsInput, ModelsUpdateWithoutTransformationsInput>, ModelsUncheckedUpdateWithoutTransformationsInput>
+  }
+
+  export type TransformationsCreateNestedManyWithoutModelInput = {
+    create?: XOR<TransformationsCreateWithoutModelInput, TransformationsUncheckedCreateWithoutModelInput> | TransformationsCreateWithoutModelInput[] | TransformationsUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: TransformationsCreateOrConnectWithoutModelInput | TransformationsCreateOrConnectWithoutModelInput[]
+    createMany?: TransformationsCreateManyModelInputEnvelope
+    connect?: TransformationsWhereUniqueInput | TransformationsWhereUniqueInput[]
+  }
+
+  export type TransformationsUncheckedCreateNestedManyWithoutModelInput = {
+    create?: XOR<TransformationsCreateWithoutModelInput, TransformationsUncheckedCreateWithoutModelInput> | TransformationsCreateWithoutModelInput[] | TransformationsUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: TransformationsCreateOrConnectWithoutModelInput | TransformationsCreateOrConnectWithoutModelInput[]
+    createMany?: TransformationsCreateManyModelInputEnvelope
+    connect?: TransformationsWhereUniqueInput | TransformationsWhereUniqueInput[]
   }
 
   export type EnumPERFORMANCEFieldUpdateOperationsInput = {
@@ -8343,6 +8586,34 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type TransformationsUpdateManyWithoutModelNestedInput = {
+    create?: XOR<TransformationsCreateWithoutModelInput, TransformationsUncheckedCreateWithoutModelInput> | TransformationsCreateWithoutModelInput[] | TransformationsUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: TransformationsCreateOrConnectWithoutModelInput | TransformationsCreateOrConnectWithoutModelInput[]
+    upsert?: TransformationsUpsertWithWhereUniqueWithoutModelInput | TransformationsUpsertWithWhereUniqueWithoutModelInput[]
+    createMany?: TransformationsCreateManyModelInputEnvelope
+    set?: TransformationsWhereUniqueInput | TransformationsWhereUniqueInput[]
+    disconnect?: TransformationsWhereUniqueInput | TransformationsWhereUniqueInput[]
+    delete?: TransformationsWhereUniqueInput | TransformationsWhereUniqueInput[]
+    connect?: TransformationsWhereUniqueInput | TransformationsWhereUniqueInput[]
+    update?: TransformationsUpdateWithWhereUniqueWithoutModelInput | TransformationsUpdateWithWhereUniqueWithoutModelInput[]
+    updateMany?: TransformationsUpdateManyWithWhereWithoutModelInput | TransformationsUpdateManyWithWhereWithoutModelInput[]
+    deleteMany?: TransformationsScalarWhereInput | TransformationsScalarWhereInput[]
+  }
+
+  export type TransformationsUncheckedUpdateManyWithoutModelNestedInput = {
+    create?: XOR<TransformationsCreateWithoutModelInput, TransformationsUncheckedCreateWithoutModelInput> | TransformationsCreateWithoutModelInput[] | TransformationsUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: TransformationsCreateOrConnectWithoutModelInput | TransformationsCreateOrConnectWithoutModelInput[]
+    upsert?: TransformationsUpsertWithWhereUniqueWithoutModelInput | TransformationsUpsertWithWhereUniqueWithoutModelInput[]
+    createMany?: TransformationsCreateManyModelInputEnvelope
+    set?: TransformationsWhereUniqueInput | TransformationsWhereUniqueInput[]
+    disconnect?: TransformationsWhereUniqueInput | TransformationsWhereUniqueInput[]
+    delete?: TransformationsWhereUniqueInput | TransformationsWhereUniqueInput[]
+    connect?: TransformationsWhereUniqueInput | TransformationsWhereUniqueInput[]
+    update?: TransformationsUpdateWithWhereUniqueWithoutModelInput | TransformationsUpdateWithWhereUniqueWithoutModelInput[]
+    updateMany?: TransformationsUpdateManyWithWhereWithoutModelInput | TransformationsUpdateManyWithWhereWithoutModelInput[]
+    deleteMany?: TransformationsScalarWhereInput | TransformationsScalarWhereInput[]
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -8573,17 +8844,23 @@ export namespace Prisma {
   export type TransformationsCreateWithoutAuthorInput = {
     id?: string
     content: string
+    input: string
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TransformationsCreatetagsInput | string[]
+    modelName: string
+    model: ModelsCreateNestedOneWithoutTransformationsInput
   }
 
   export type TransformationsUncheckedCreateWithoutAuthorInput = {
     id?: string
     content: string
+    input: string
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TransformationsCreatetagsInput | string[]
+    modelName: string
+    modelId: string
   }
 
   export type TransformationsCreateOrConnectWithoutAuthorInput = {
@@ -8671,9 +8948,12 @@ export namespace Prisma {
     id?: UuidFilter<"Transformations"> | string
     authorId?: UuidFilter<"Transformations"> | string
     content?: StringFilter<"Transformations"> | string
+    input?: StringFilter<"Transformations"> | string
     createdAt?: DateTimeFilter<"Transformations"> | Date | string
     updatedAt?: DateTimeFilter<"Transformations"> | Date | string
     tags?: StringNullableListFilter<"Transformations">
+    modelName?: StringFilter<"Transformations"> | string
+    modelId?: UuidFilter<"Transformations"> | string
   }
 
   export type KeysUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -8909,6 +9189,35 @@ export namespace Prisma {
     create: XOR<UsersCreateWithoutTransformationsInput, UsersUncheckedCreateWithoutTransformationsInput>
   }
 
+  export type ModelsCreateWithoutTransformationsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    performance: $Enums.PERFORMANCE
+    type: $Enums.TYPE
+    pro?: boolean
+    speed?: number
+    accuracy?: number
+  }
+
+  export type ModelsUncheckedCreateWithoutTransformationsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    performance: $Enums.PERFORMANCE
+    type: $Enums.TYPE
+    pro?: boolean
+    speed?: number
+    accuracy?: number
+  }
+
+  export type ModelsCreateOrConnectWithoutTransformationsInput = {
+    where: ModelsWhereUniqueInput
+    create: XOR<ModelsCreateWithoutTransformationsInput, ModelsUncheckedCreateWithoutTransformationsInput>
+  }
+
   export type UsersUpsertWithoutTransformationsInput = {
     update: XOR<UsersUpdateWithoutTransformationsInput, UsersUncheckedUpdateWithoutTransformationsInput>
     create: XOR<UsersCreateWithoutTransformationsInput, UsersUncheckedCreateWithoutTransformationsInput>
@@ -8948,12 +9257,98 @@ export namespace Prisma {
     Tags?: TagsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
-  export type TransformationsCreateManyAuthorInput = {
+  export type ModelsUpsertWithoutTransformationsInput = {
+    update: XOR<ModelsUpdateWithoutTransformationsInput, ModelsUncheckedUpdateWithoutTransformationsInput>
+    create: XOR<ModelsCreateWithoutTransformationsInput, ModelsUncheckedCreateWithoutTransformationsInput>
+    where?: ModelsWhereInput
+  }
+
+  export type ModelsUpdateToOneWithWhereWithoutTransformationsInput = {
+    where?: ModelsWhereInput
+    data: XOR<ModelsUpdateWithoutTransformationsInput, ModelsUncheckedUpdateWithoutTransformationsInput>
+  }
+
+  export type ModelsUpdateWithoutTransformationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    performance?: EnumPERFORMANCEFieldUpdateOperationsInput | $Enums.PERFORMANCE
+    type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
+    pro?: BoolFieldUpdateOperationsInput | boolean
+    speed?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type ModelsUncheckedUpdateWithoutTransformationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    performance?: EnumPERFORMANCEFieldUpdateOperationsInput | $Enums.PERFORMANCE
+    type?: EnumTYPEFieldUpdateOperationsInput | $Enums.TYPE
+    pro?: BoolFieldUpdateOperationsInput | boolean
+    speed?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type TransformationsCreateWithoutModelInput = {
     id?: string
     content: string
+    input: string
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TransformationsCreatetagsInput | string[]
+    modelName: string
+    author: UsersCreateNestedOneWithoutTransformationsInput
+  }
+
+  export type TransformationsUncheckedCreateWithoutModelInput = {
+    id?: string
+    authorId: string
+    content: string
+    input: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TransformationsCreatetagsInput | string[]
+    modelName: string
+  }
+
+  export type TransformationsCreateOrConnectWithoutModelInput = {
+    where: TransformationsWhereUniqueInput
+    create: XOR<TransformationsCreateWithoutModelInput, TransformationsUncheckedCreateWithoutModelInput>
+  }
+
+  export type TransformationsCreateManyModelInputEnvelope = {
+    data: TransformationsCreateManyModelInput | TransformationsCreateManyModelInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TransformationsUpsertWithWhereUniqueWithoutModelInput = {
+    where: TransformationsWhereUniqueInput
+    update: XOR<TransformationsUpdateWithoutModelInput, TransformationsUncheckedUpdateWithoutModelInput>
+    create: XOR<TransformationsCreateWithoutModelInput, TransformationsUncheckedCreateWithoutModelInput>
+  }
+
+  export type TransformationsUpdateWithWhereUniqueWithoutModelInput = {
+    where: TransformationsWhereUniqueInput
+    data: XOR<TransformationsUpdateWithoutModelInput, TransformationsUncheckedUpdateWithoutModelInput>
+  }
+
+  export type TransformationsUpdateManyWithWhereWithoutModelInput = {
+    where: TransformationsScalarWhereInput
+    data: XOR<TransformationsUpdateManyMutationInput, TransformationsUncheckedUpdateManyWithoutModelInput>
+  }
+
+  export type TransformationsCreateManyAuthorInput = {
+    id?: string
+    content: string
+    input: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TransformationsCreatetagsInput | string[]
+    modelName: string
+    modelId: string
   }
 
   export type KeysCreateManyAuthorInput = {
@@ -8975,25 +9370,34 @@ export namespace Prisma {
   export type TransformationsUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    input?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TransformationsUpdatetagsInput | string[]
+    modelName?: StringFieldUpdateOperationsInput | string
+    model?: ModelsUpdateOneRequiredWithoutTransformationsNestedInput
   }
 
   export type TransformationsUncheckedUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    input?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TransformationsUpdatetagsInput | string[]
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
   }
 
   export type TransformationsUncheckedUpdateManyWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    input?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TransformationsUpdatetagsInput | string[]
+    modelName?: StringFieldUpdateOperationsInput | string
+    modelId?: StringFieldUpdateOperationsInput | string
   }
 
   export type KeysUpdateWithoutAuthorInput = {
@@ -9042,6 +9446,50 @@ export namespace Prisma {
     prompt?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TransformationsCreateManyModelInput = {
+    id?: string
+    authorId: string
+    content: string
+    input: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TransformationsCreatetagsInput | string[]
+    modelName: string
+  }
+
+  export type TransformationsUpdateWithoutModelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    input?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TransformationsUpdatetagsInput | string[]
+    modelName?: StringFieldUpdateOperationsInput | string
+    author?: UsersUpdateOneRequiredWithoutTransformationsNestedInput
+  }
+
+  export type TransformationsUncheckedUpdateWithoutModelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    input?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TransformationsUpdatetagsInput | string[]
+    modelName?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TransformationsUncheckedUpdateManyWithoutModelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    input?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TransformationsUpdatetagsInput | string[]
+    modelName?: StringFieldUpdateOperationsInput | string
   }
 
 
