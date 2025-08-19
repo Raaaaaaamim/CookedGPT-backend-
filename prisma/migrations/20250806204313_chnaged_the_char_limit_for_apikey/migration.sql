@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Keys" ALTER COLUMN "apiKey" SET DATA TYPE VARCHAR(400);

@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  username        String            @unique
+  email           String            @unique
+  fullName        String            @db.VarChar(70)
+  clerkId         String            @unique
+  avatar          String?
+  transformations Transformations[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  apiKeys         Keys[]
+  Tags            Tags[]
+  role            ROLE              @default(USER)
+}
+
+model Tags {
+  id        String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String   @db.VarChar(20)
+  prompt    String   @db.VarChar(5000)
+  authorId  String   @unique @db.Uuid
+  author    Users    @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Keys {
+  id        String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  apiKey    String   @unique @db.VarChar(400)
+  authorId  String   @db.Uuid
+  author    Users    @relation(fields: [authorId], references: [id])
+  type      TYPE
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Transformations {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  authorId  String   @db.Uuid
+  author    Users    @relation(fields: [authorId], references: [id])
+  content   String   @db.VarChar(5000)
+  input     String   @db.VarChar(7000)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tags      String[]
+  modelName String   @db.VarChar(70)
+  modelId   String   @db.Uuid
+  model     Models   @relation(fields: [modelId], references: [id])
+}
+
+model Models {
+  id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name            String            @unique @db.VarChar(70)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  performance     PERFORMANCE
+  type            TYPE
+  pro             Boolean           @default(false)
+  speed           Float             @default(0)
+  accuracy        Float             @default(0)
+  transformations Transformations[]
+}
+
+enum PERFORMANCE {
+  AVERAGE
+  GOOD
+  EXCELLENT
+}
+
+enum TYPE {
+  OPENAI
+  OPENROUTER
+  GEMINI
+}
+
+enum ROLE {
+  USER
+  ADMIN
+}
