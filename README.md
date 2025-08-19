@@ -1,2 +1,0 @@
-# CookedGPT-backend-
-CookedGPT backend
