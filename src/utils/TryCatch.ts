@@ -7,7 +7,7 @@ export const TryCatch =
     try {
       return await controller(c, next);
     } catch (error: any) {
-      console.log(error);
+      // console.log(error);
 
       return c.json({ error: error?.message || StatusCodes.SERVER_ERROR }, 500);
     }

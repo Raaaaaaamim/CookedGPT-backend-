@@ -1,10 +1,10 @@
 import { Context } from "hono";
 import { prisma } from "../../database";
-import { encryptApiKey } from "../../utils/encryptDecryptKeys";
+import { encrypt } from "../../utils/encryptDecrypt";
 import verifyUser from "../../utils/verifyUser";
-
 const createApiKey = async (c: Context): Promise<Response> => {
   const { apiKey, type } = await c.req.json();
+  console.log(apiKey, type);
 
   const clerkId = c.get("clerkAuth")?.userId;
   if (!clerkId) {
@@ -28,12 +28,11 @@ const createApiKey = async (c: Context): Promise<Response> => {
   if (existingKey) {
     return c.json({ error: "Key already exists" }, 400);
   }
-
-  const encryptedKey = encryptApiKey(apiKey);
+  const encryptedKey = encrypt(apiKey);
 
   const key = await prisma.keys.create({
     data: {
-      apiKey: encryptedKey,
+      apiKey: encryptedKey!,
       authorId: user.id,
       type: type.toUpperCase().trim(),
     },

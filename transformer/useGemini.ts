@@ -7,14 +7,14 @@ import {
 import { CustomError } from "../src/utils/CustomError";
 import getModelById from "../src/utils/getModelById";
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+// const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
-if (!GEMINI_API_KEY) {
-  throw new CustomError(
-    "GEMINI_API_KEY is not set in environment variables.",
-    StatusCodes.SERVER_ERROR
-  );
-}
+// if (!GEMINI_API_KEY) {
+//   throw new CustomError(
+//     "GEMINI_API_KEY is not set in environment variables.",
+//     StatusCodes.SERVER_ERROR
+//   );
+// }
 
 const useGemini = async ({
   modelId,
@@ -22,7 +22,7 @@ const useGemini = async ({
   key,
 }: DEFAULT_TRANSFORMER_PROPS): Promise<DEFAULT_TRANSFORMER_OUTPUT> => {
   try {
-    const ai = new GoogleGenAI({ apiKey: key || GEMINI_API_KEY });
+    const ai = new GoogleGenAI({ apiKey: key! });
 
     const model = await getModelById(modelId, "GEMINI");
     const response = await ai.models.generateContent({

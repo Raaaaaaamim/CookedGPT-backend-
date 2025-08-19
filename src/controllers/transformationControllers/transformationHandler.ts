@@ -104,7 +104,6 @@ const transformationHandler = async (c: Context): Promise<Response> => {
         input: content.trim(),
       },
     });
-    console.log(transformation);
     return c.json(transformation, 200);
   }
   return c.json({ error: "Transformation failed" }, 500);

@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import deleteTransformation from "../controllers/transformationControllers/deleteTransformation";
 import getTransformations from "../controllers/transformationControllers/getTransformations";
 import searchTransformations from "../controllers/transformationControllers/searchTransformations";
 import getProfile from "../controllers/userControllers/getProfile";
@@ -17,6 +18,12 @@ user.get(
   ProtectedRoute,
   TryCatch(searchTransformations)
 );
+user.delete(
+  "/transformations/:id",
+  ProtectedRoute,
+  TryCatch(deleteTransformation)
+);
+
 user.get("/transformations/:tag", ProtectedRoute, TryCatch(getTransformations));
 
 export default user;

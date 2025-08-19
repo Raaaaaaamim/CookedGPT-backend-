@@ -25,7 +25,7 @@ const useOpenRouter = async ({
     },
     {
       headers: {
-        Authorization: `Bearer ${key}`,
+        Authorization: `Bearer ${key?.toString()}`,
         "Content-Type": "application/json",
       },
     }

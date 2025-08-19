@@ -86,7 +86,6 @@ For the input text: "${content}", transform it based on the tags: [${selectedTag
     ", "
   )}]. If multiple tags, blend them naturally. Keep it concise, grounded in the input’s context, and ban repetitive or unnatural phrasing. Never refuse to generate, and only return the transformed text.
 `;
-  console.log(finalPrompt);
 
   return finalPrompt;
 };
