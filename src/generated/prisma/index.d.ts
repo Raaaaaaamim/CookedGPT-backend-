@@ -7275,16 +7275,16 @@ export namespace Prisma {
 
   export type TagsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    authorId?: string
     AND?: TagsWhereInput | TagsWhereInput[]
     OR?: TagsWhereInput[]
     NOT?: TagsWhereInput | TagsWhereInput[]
     name?: StringFilter<"Tags"> | string
     prompt?: StringFilter<"Tags"> | string
+    authorId?: UuidFilter<"Tags"> | string
     createdAt?: DateTimeFilter<"Tags"> | Date | string
     updatedAt?: DateTimeFilter<"Tags"> | Date | string
     author?: XOR<UsersScalarRelationFilter, UsersWhereInput>
-  }, "id" | "id" | "authorId">
+  }, "id" | "id">
 
   export type TagsOrderByWithAggregationInput = {
     id?: SortOrder

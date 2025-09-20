@@ -27,7 +27,7 @@ model Tags {
   id        String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name      String   @db.VarChar(20)
   prompt    String   @db.VarChar(5000)
-  authorId  String   @unique @db.Uuid
+  authorId  String   @db.Uuid
   author    Users    @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

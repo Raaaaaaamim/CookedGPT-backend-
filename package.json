@@ -7,15 +7,15 @@
     "@clerk/backend": "^1.30.0",
     "@google/genai": "^0.8.0",
     "@hono/clerk-auth": "^2.0.0",
-    "@prisma/client": "^6.7.0",
+    "@prisma/client": "^6.15.0",
     "@types/jsonwebtoken": "^9.0.9",
     "axios": "^1.9.0",
     "crypto-js": "^4.2.0",
     "hono": "^4.7.8",
     "i": "^0.3.7",
     "npm": "^11.3.0",
-    "openai": "^5.10.2",
-    "prisma": "^6.7.0",
+    "openai": "^5.19.1",
+    "prisma": "^6.15.0",
     "svix": "^1.65.0"
   },
   "devDependencies": {
